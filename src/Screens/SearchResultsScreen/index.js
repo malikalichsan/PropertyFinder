@@ -12,7 +12,7 @@ import {
 
 class ListItem extends React.PureComponent {
   _onPress = () => {
-    this.props.onPressItem(this.props.index);
+    this.props.onPressItem(this.props.index, this.props.item);
   }
 
   render() {
@@ -41,9 +41,9 @@ class ListItem extends React.PureComponent {
 type Props = {};
 
 export default class SearchResultsScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Results',
-  };
+    static navigationOptions = {
+      title: 'Results',
+    };
 
   _keyExtractor = (item, index) => index.toString();
 
@@ -55,11 +55,14 @@ export default class SearchResultsScreen extends React.Component {
     />
   );
 
-  _onPressItem = (index) => {
-    console.log('Pressed row: ' + index);
+  _onPressItem = (index, item) => {
+    console.log(item);
+    this.props.navigation.navigate('Detail', {item: item});
   };
 
   render() {
+    console.log('SearchResults.render');
+
     const {params} = this.props.navigation.state;
 
     return (
